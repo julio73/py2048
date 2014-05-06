@@ -7,11 +7,12 @@ import keypressutils
 class Game:
     """Python 2048 game"""
     
-    def __init__(self):
+    def __init__(self, layout_id=1):
         """Initialize a new game instance."""
-        self.__initialize()
+        self.__initialize(layout_id)
     
-    def __initialize(self):
+    def __initialize(self, layout_id):
+        self._layout_id = layout_id
         self._grid = {
             1:{1:0,2:0,3:0,4:0},
             2:{1:0,2:0,3:0,4:0},
@@ -28,10 +29,9 @@ class Game:
     
     def start_game(self):
         """Start the game instance."""
-        self._display = displayutils.DisplayUtils()
+        self._display = displayutils.DisplayUtils(self._layout_id)
         self._keypress = keypressutils.KeypressUtils()
         
-        self._display.load_layout_file()
         self.add_random_tile()
         self.add_random_tile()
         self.refresh_game_board()
@@ -137,7 +137,7 @@ class Game:
         response = self._keypress.getch_()
         if response == "y" or response == "Y":
             print response, "-> 'Yep'"
-            self.__initialize()
+            self.__initialize(self._layout_id)
             self.start_game()
         elif response == "n" or response == "N":
             print response, "-> 'Nope'"
