@@ -21,6 +21,8 @@ class DisplayUtils:
         """Start subprocess for clear screen signal."""
         if os.name == 'nt':
             subprocess.call('cls')
+        elif os.name == 'posix':
+            subprocess.call("clear && printf '\e[3J'")
         else:
             subprocess.call('clear')
     
@@ -38,6 +40,7 @@ class DisplayUtils:
         new_layout = new_layout.replace('\t+', '-'*w+'+')
         new_layout = new_layout.replace('\t|', ' '*w+'|')
         self._layout = new_layout
+    
     def display_game_board(self, values, score): 
         """Display the game board using the loaded layout."""
         if self._layout is not None:
