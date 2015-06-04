@@ -21,8 +21,8 @@ class DisplayUtils:
         """Start subprocess for clear screen signal."""
         if os.name == 'nt':
             subprocess.call('cls')
-        elif os.name == 'posix':
-            subprocess.call("clear && printf '\e[3J'")
+        # elif os.name == 'posix':
+        #     subprocess.call("clear && printf '\e[3J'")
         else:
             subprocess.call('clear')
     
